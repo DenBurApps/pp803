@@ -7,7 +7,7 @@ namespace FootballGame
     [RequireComponent(typeof(Collider2D))]
     public class Field : MonoBehaviour
     {
-        private CircleCollider2D _collider;
+        private BoxCollider2D _collider;
         private LinearMovementComponent _linearMovementComponent;
         private Transform _transform;
         private Vector2 _defaultPosition;
@@ -18,7 +18,7 @@ namespace FootballGame
         {
             _transform = transform;
             _defaultPosition = _transform.position;
-            _collider = GetComponent<CircleCollider2D>();
+            _collider = GetComponent<BoxCollider2D>();
             _linearMovementComponent = GetComponent<LinearMovementComponent>();
         }
 

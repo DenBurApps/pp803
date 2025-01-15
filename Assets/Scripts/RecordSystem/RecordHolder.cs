@@ -10,13 +10,14 @@ namespace RecordSystem
     {
         private static readonly string _savePath = Path.Combine(Application.persistentDataPath, "SaveData");
         private static Dictionary<GameType, RecordData> _records = new();
-        
+
         static RecordHolder()
         {
             foreach (GameType gameType in Enum.GetValues(typeof(GameType)))
             {
                 _records[gameType] = new RecordData(0, gameType);
             }
+
             LoadData();
         }
 
@@ -28,12 +29,12 @@ namespace RecordSystem
                 SaveData();
             }
         }
-        
+
         public static int GetRecordByType(GameType gameType)
         {
             return _records.TryGetValue(gameType, out var record) ? record.BestScore : default;
         }
-        
+
         private static void SaveData()
         {
             try
@@ -58,12 +59,12 @@ namespace RecordSystem
             {
                 var json = File.ReadAllText(_savePath);
                 var wrapper = JsonConvert.DeserializeObject<RecordDataWrapper>(json);
-                if (wrapper?.RecordDatas != null)
+
+                foreach (var record in wrapper.RecordDatas)
                 {
-                    foreach (var record in wrapper.RecordDatas)
+                    if (Enum.IsDefined(typeof(GameType), record.GameType) && _records.ContainsKey(record.GameType))
                     {
-                        if (_records.ContainsKey(record.GameType))
-                            _records[record.GameType] = record;
+                        _records[record.GameType] = record;
                     }
                 }
             }
@@ -80,7 +81,7 @@ namespace RecordSystem
 
             public RecordDataWrapper(List<RecordData> records)
             {
-                RecordDatas = new List<RecordData>(records);
+                RecordDatas = records;
             }
         }
 

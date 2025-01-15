@@ -13,7 +13,7 @@ namespace MainScreen
         
         private void Start()
         {
-            _record.text = "Record: " + RecordSystem.RecordHolder.GetRecordByType(_gameType);
+            _record.text = "Record: " + RecordHolder.GetRecordByType(_gameType);
         }
     }
 }

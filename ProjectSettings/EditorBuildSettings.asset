@@ -8,4 +8,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/InitializeScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: 5cf0a19897babaa4cab92fd53e285c3c
+  - enabled: 1
+    path: Assets/Scenes/PoleScene.unity
+    guid: fb8043908d3528b4d94f0d6100053957
+  - enabled: 1
+    path: Assets/Scenes/TennisScene.unity
+    guid: 7664d828a4175c843ae6467785596e39
+  - enabled: 1
+    path: Assets/Scenes/HockeyScene.unity
+    guid: 18da804e24baa464aab3ac9c4900ddd4
+  - enabled: 1
+    path: Assets/Scenes/FootballScene.unity
+    guid: b7ace6ad49f99e241830691c3efe4dd8
+  - enabled: 1
+    path: Assets/Scenes/BasketballScene.unity
+    guid: f8184b614442d9343b33c6e4d389e0da
   m_configObjects: {}

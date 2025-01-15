@@ -7,8 +7,6 @@ namespace FootballGame
     public class Wall : MonoBehaviour
     {
         private BoxCollider2D _collider;
-        
-        public event Action Hit;
 
         private void Awake()
         {
@@ -19,18 +17,8 @@ namespace FootballGame
         {
             if (collision.collider.TryGetComponent(out Ball ball))
             {
-                Hit?.Invoke();
+                ball.SetDefault();
             }
-        }
-
-        public void DisableCollision()
-        {
-            _collider.enabled = false;
-        }
-
-        public void EnableCollision()
-        {
-            _collider.enabled = true;
         }
     }
 }

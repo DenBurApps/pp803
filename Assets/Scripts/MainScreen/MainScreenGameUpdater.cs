@@ -9,6 +9,12 @@ using UnityEngine.UI;
 [RequireComponent(typeof(ScreenVisabilityHandler))]
 public class MainScreenGameUpdater : MonoBehaviour
 {
+    private const string FootballSceneName = "FootballScene";
+    private const string TennisSceneName = "TennisScene";
+    private const string HockeySceneName = "HockeyScene";
+    private const string BasketballSceneName = "BasketballScene";
+    private const string PoleSceneName = "PoleScene";
+    
     [SerializeField] private SimpleScrollSnap _scrollSnap;
     [SerializeField] private StartMenuScreen _startMenuScreen;
     [SerializeField] private List<GameObject> _panels;
@@ -22,12 +28,8 @@ public class MainScreenGameUpdater : MonoBehaviour
     [SerializeField] private Button _hockeyInfoButton;
     [SerializeField] private Button _poleGameButton;
     [SerializeField] private Button _poleInfoButton;
-    //[SerializeField] private Button _settingsButton;
-    //[SerializeField] private SettingsScreen _settingsScreen;
 
     private ScreenVisabilityHandler _screenVisabilityHandler;
-
-    public event Action SettingsClicked;
     
     private void Awake()
     {
@@ -39,23 +41,35 @@ public class MainScreenGameUpdater : MonoBehaviour
     private void OnEnable()
     {
         _tennisGameButton.onClick.AddListener(RunTennis);
-        _footballGameButton.onClick.AddListener(RunGolf);
-        _basketballGameButton.onClick.AddListener(RunStreetball);
-       //_settingsButton.onClick.AddListener(OnSettingsClicked);
+        _footballGameButton.onClick.AddListener(RunFootball);
+        _basketballGameButton.onClick.AddListener(RunBasketball);
+        _hockeyGameButton.onClick.AddListener(RunHockey);
+        _poleGameButton.onClick.AddListener(RunPole);
+        
+        _tennisInfoButton.onClick.AddListener(() => RunWithTutorial(TennisSceneName));
+        _footballInfoButton.onClick.AddListener((() => RunWithTutorial(FootballSceneName)));
+        _basketballInfoButton.onClick.AddListener((() => RunWithTutorial(BasketballSceneName)));
+        _hockeyInfoButton.onClick.AddListener((() => RunWithTutorial(HockeySceneName)));
+        _poleInfoButton.onClick.AddListener((() => RunWithTutorial(PoleSceneName)));
+       
         _startMenuScreen.GameSelectionOpened += _screenVisabilityHandler.EnableScreen;
-
-        //  _settingsScreen.BackButtonClicked += _screenVisabilityHandler.EnableScreen;
     }
 
     private void OnDisable()
     {
         _tennisGameButton.onClick.RemoveListener(RunTennis);
-        _footballGameButton.onClick.RemoveListener(RunGolf);
-        _basketballGameButton.onClick.RemoveListener(RunStreetball);
-       // _settingsButton.onClick.RemoveListener(OnSettingsClicked);
-        _startMenuScreen.GameSelectionOpened -= _screenVisabilityHandler.EnableScreen;
+        _footballGameButton.onClick.RemoveListener(RunFootball);
+        _basketballGameButton.onClick.RemoveListener(RunBasketball);
+        _hockeyGameButton.onClick.RemoveListener(RunHockey);
+        _poleGameButton.onClick.RemoveListener(RunPole);
         
-      //  _settingsScreen.BackButtonClicked -= _screenVisabilityHandler.EnableScreen;
+        _tennisInfoButton.onClick.RemoveListener(() => RunWithTutorial(TennisSceneName));
+        _footballInfoButton.onClick.RemoveListener((() => RunWithTutorial(FootballSceneName)));
+        _basketballInfoButton.onClick.RemoveListener((() => RunWithTutorial(BasketballSceneName)));
+        _hockeyInfoButton.onClick.RemoveListener((() => RunWithTutorial(HockeySceneName)));
+        _poleInfoButton.onClick.RemoveListener((() => RunWithTutorial(PoleSceneName)));
+       
+        _startMenuScreen.GameSelectionOpened -= _screenVisabilityHandler.EnableScreen;
     }
 
     private void Start()
@@ -73,14 +87,16 @@ public class MainScreenGameUpdater : MonoBehaviour
         _panels[start].SetActive(true);
     }
 
-    private void RunTennis() => SceneManager.LoadScene("TennisScene");
-    private void RunGolf() => SceneManager.LoadScene("GolfScene");
-    private void RunStreetball() => SceneManager.LoadScene("StreetballScene");
+    private void RunTennis() => SceneManager.LoadScene(TennisSceneName);
+    private void RunFootball() => SceneManager.LoadScene(FootballSceneName);
+    private void RunBasketball() => SceneManager.LoadScene(BasketballSceneName);
+    private void RunHockey() => SceneManager.LoadScene(HockeySceneName);
+    private void RunPole() => SceneManager.LoadScene(PoleSceneName);
 
-    private void OnSettingsClicked()
+    private void RunWithTutorial(string sceneName)
     {
-        SettingsClicked?.Invoke();
-        _screenVisabilityHandler.SetTransperent();
+        GameState.ShowTutorial = true;
+        SceneManager.LoadScene(sceneName);
     }
 }
 

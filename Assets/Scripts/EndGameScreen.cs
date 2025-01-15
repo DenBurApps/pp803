@@ -10,6 +10,7 @@ public class EndGameScreen : MonoBehaviour
 {
    [SerializeField] private TMP_Text _scoreText;
    [SerializeField] private TMP_Text _recordText;
+   [SerializeField] private AudioSource _sound;
    
    public event Action RestartGame;
    public event Action ExitGame;
@@ -26,6 +27,7 @@ public class EndGameScreen : MonoBehaviour
       _screenVisabilityHandler.EnableScreen();
       _scoreText.text = score.ToString();
       _recordText.text = "Your record: " + RecordHolder.GetRecordByType(gameType);
+      _sound.Play();
    }
 
    public void DisableScreen()

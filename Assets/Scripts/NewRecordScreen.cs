@@ -6,6 +6,7 @@ using UnityEngine;
 public class NewRecordScreen : MonoBehaviour
 {
     [SerializeField] private TMP_Text _record;
+    [SerializeField] private AudioSource _sound;
 
     private ScreenVisabilityHandler _screenVisabilityHandler;
 
@@ -21,6 +22,7 @@ public class NewRecordScreen : MonoBehaviour
     {
         _screenVisabilityHandler.EnableScreen();
         _record.text = record.ToString();
+        _sound.Play();
     }
     
     public void DisableScreen()

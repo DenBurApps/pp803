@@ -9,7 +9,6 @@ public class StartMenuScreen : MonoBehaviour
     private ScreenVisabilityHandler _screenVisabilityHandler;
 
     public event Action GameSelectionOpened;
-    public event Action SettingsOpened;
 
     private void Awake()
     {
@@ -17,6 +16,11 @@ public class StartMenuScreen : MonoBehaviour
     }
 
     private void Start()
+    {
+        _screenVisabilityHandler.EnableScreen();
+    }
+
+    public void EnableScreen()
     {
         _screenVisabilityHandler.EnableScreen();
     }
@@ -29,7 +33,6 @@ public class StartMenuScreen : MonoBehaviour
 
     public void OpenSettings()
     {
-        SettingsOpened?.Invoke();
         _screenVisabilityHandler.DisableScreen();
     }
 }
